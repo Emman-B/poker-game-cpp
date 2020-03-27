@@ -26,7 +26,7 @@ public:
     card(unsigned char r, suit_t s);
 
     // member overload operator== for checking equality
-    bool operator== (const card&);
+    bool operator== (const card&) const;
     
     // non-member overload operator<< for printing
     friend std::ostream& operator<< (std::ostream&, const card&);
