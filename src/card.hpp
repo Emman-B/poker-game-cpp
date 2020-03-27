@@ -22,11 +22,11 @@ public:
     // ctors
     card(unsigned char r, suit_t s);
 
-    // overload operator<< for printing
-    friend std::ostream& operator<< (std::ostream&, const card&);
-
-    // overload operator== for checking equality
+    // member overload operator== for checking equality
     bool operator== (const card&);
+    
+    // non-member overload operator<< for printing
+    friend std::ostream& operator<< (std::ostream&, const card&);
 };
 
 #endif
