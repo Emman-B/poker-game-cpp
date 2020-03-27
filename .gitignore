@@ -1,3 +1,7 @@
+## vscode
+.vscode/
+
+## c++ auto-generated gitignore
 # Prerequisites
 *.d
 
