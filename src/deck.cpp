@@ -23,8 +23,10 @@ std::ostream& operator<< (std::ostream& out, const deck& d)
 {
     if (d.cards.size() > 0)
     {
-        for(auto& cd : d.cards)
+        for(auto const &cd : d.cards)
         {
+            // print card with newline until last item
+            out << cd << ( (cd == *d.cards.rbegin())?"":"\n" ) << std::flush;
         }
     }
 }
