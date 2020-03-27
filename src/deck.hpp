@@ -7,6 +7,10 @@
 
 class deck
 {
+    /* friend declarations */
+    // for printing
+    friend std::ostream& operator<< (std::ostream&, const deck&);
+
 private:
     std::vector<card> cards;
 public:
@@ -16,9 +20,6 @@ public:
     // ** Functions ** //
     // shuffles all the cards in the deck (vector of cards)
     void shuffle();
-
-    // for printing
-    friend std::ostream& operator<< (std::ostream&, const deck&);
 };
 
 #endif
