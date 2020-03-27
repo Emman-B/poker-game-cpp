@@ -5,6 +5,13 @@
 
 class card
 {
+    /* friend declarations */
+    friend class deck;
+        // allow deck to access enum class suit_t, rank, and suit per card
+
+    friend std::ostream& operator<< (std::ostream&, const card&);
+        // non-member overload operator<< for printing
+
 private:
     enum class suit_t;  // forward declaration
 
@@ -27,9 +34,6 @@ public:
 
     // member overload operator== for checking equality
     bool operator== (const card&) const;
-    
-    // non-member overload operator<< for printing
-    friend std::ostream& operator<< (std::ostream&, const card&);
 };
 
 #endif
