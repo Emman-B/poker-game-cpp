@@ -12,6 +12,13 @@ private:
 public:
     // ctor
     deck();
+
+    // ** Functions ** //
+    // shuffles all the cards in the deck (vector of cards)
+    void shuffle();
+
+    // for printing
+    friend std::ostream& operator<< (std::ostream&, const deck&);
 };
 
 #endif
