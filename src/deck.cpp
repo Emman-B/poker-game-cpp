@@ -9,7 +9,8 @@ deck::deck()
     {
         for (unsigned char rank_n = 1; rank_n <= 13; rank_n++)
         {
-            cards.emplace_back(rank_n, suit_n);
+            card newcard(rank_n, static_cast<card::suit_t>(suit_n));
+            cards.push_back(newcard);
         }
     }
 }
@@ -29,4 +30,5 @@ std::ostream& operator<< (std::ostream& out, const deck& d)
             out << cd << ( (cd == *d.cards.rbegin())?"":"\n" ) << std::flush;
         }
     }
+    return out;
 }
