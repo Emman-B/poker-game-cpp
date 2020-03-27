@@ -18,6 +18,12 @@ card::card(unsigned char r, suit_t s)
     
 }
 
+bool card::operator== (const card& that)
+{
+    // equality only if rank and suit match
+    return (rank == that.rank && suit == that.suit);
+}
+
 std::ostream& operator<< (std::ostream& out, const card& c)
 {
     // Format "rank_str of suit_str"
