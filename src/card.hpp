@@ -16,7 +16,10 @@ public:
     // suit_t for the four suits of cards
     enum class suit_t
     {
-        DIAMONDS, CLUBS, HEARTS, SPADES
+        DIAMONDS = 0,
+        CLUBS    = 1,
+        HEARTS   = 2,
+        SPADES   = 3
     };
 
     // ctors

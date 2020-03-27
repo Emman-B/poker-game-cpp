@@ -1,11 +1,21 @@
 #include "card.hpp"
 
 #include <string>
+#include <unordered_map>
+
+// for handling ace, and 3 face cards
+std::unordered_map<unsigned char, std::string> uniquerank_str_map
+{
+    {1,     "ace"},
+    {11,    "jack"},
+    {12,    "queen"},
+    {13,    "king"}
+};
 
 card::card(unsigned char r, suit_t s)
 {
-    // error-check: is rank within range [1, 10]?
-    if (r == 0 || r > 10)
+    // error-check: is rank within range [1, 13]?
+    if (r == 0 || r > 13)
     {
         throw std::runtime_error("card::card: rank out of range: " +
             static_cast<unsigned int>(r));
@@ -31,9 +41,9 @@ std::ostream& operator<< (std::ostream& out, const card& c)
     std::string suit_str;
 
     // set rank_str
-    if (c.rank == 1)
+    if (uniquerank_str_map.find(c.rank) != uniquerank_str_map.end())
     {
-        rank_str = "ace";
+        rank_str = uniquerank_str_map.find(c.rank)->second;
     }
     else
     {
