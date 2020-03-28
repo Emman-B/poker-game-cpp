@@ -17,10 +17,21 @@ private:
     std::vector<card> cards; // holds cards
 public:
     /* constructor */
-    deck(); // places 52 card objects in cards vector
+    deck() = default; // makes empty deck
 
     /*** Functions ***/
     void shuffle(); // calls random_shuffle on cards vector
+
+    // add cards to deck
+    void add(const card&);
+    void add(std::vector<card>::iterator, std::vector<card>::iterator);
+
+    card draw_card();
+
+    void clear();
 };
+
+/*** Non-member functions ***/
+deck make_52_card_deck();
 
 #endif
