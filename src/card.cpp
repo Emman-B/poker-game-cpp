@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 
-// for handling ace, and 3 face cards
+// map for converting non-numeric ranks to strings
 std::unordered_map<unsigned char, std::string> uniquerank_str_map
 {
     {1,     "ace"},
@@ -12,31 +12,10 @@ std::unordered_map<unsigned char, std::string> uniquerank_str_map
     {13,    "king"}
 };
 
-card::card(unsigned char r, suit_t s)
-{
-    // error-check: is rank within range [1, 13]?
-    if (r == 0 || r > 13)
-    {
-        throw std::runtime_error("card::card: rank out of range: " +
-            static_cast<unsigned int>(r));
-    }
-    else
-    {
-        rank = r;
-        suit = s;
-    }
-    
-}
-
-bool card::operator== (const card& that) const
-{
-    // equality only if rank and suit match
-    return (rank == that.rank && suit == that.suit);
-}
-
+/* friend func */
 std::ostream& operator<< (std::ostream& out, const card& c)
 {
-    // Format "rank_str of suit_str"
+    // Format: "rank_str of suit_str"
     std::string rank_str;
     std::string suit_str;
 
@@ -73,4 +52,24 @@ std::ostream& operator<< (std::ostream& out, const card& c)
     // write to output stream
     out << rank_str << " of " << suit_str;
     return out;
+}
+
+card::card(unsigned char r, suit_t s)
+{
+    // error-check: is rank within range [1, 13]?
+    if (r == 0 || r > 13)
+    {
+        throw std::runtime_error("card::card: rank out of range: " +
+            static_cast<unsigned int>(r));
+    }
+    else
+    {
+        rank = r;
+        suit = s;
+    }
+}
+
+bool card::operator== (const card& that) const
+{
+    return (rank == that.rank && suit == that.suit);
 }

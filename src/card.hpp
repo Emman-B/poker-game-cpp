@@ -10,17 +10,15 @@ class card
         // allow deck to access enum class suit_t, rank, and suit per card
 
     friend std::ostream& operator<< (std::ostream&, const card&);
-        // non-member overload operator<< for printing
 
 private:
-    enum class suit_t;  // forward declaration
+    enum class suit_t;
 
-    // fields
-    unsigned char rank; // general range: A-10
+    /* fields */
+    unsigned char rank; // general range: A-10,J,Q,K
     suit_t suit;        // four possible suits
 
 public:
-    // suit_t for the four suits of cards
     enum class suit_t
     {
         DIAMONDS = 0,
@@ -29,10 +27,9 @@ public:
         SPADES   = 3
     };
 
-    // ctors
+    /* constructor */
     card(unsigned char r, suit_t s);
 
-    // member overload operator== for checking equality
     bool operator== (const card&) const;
 };
 

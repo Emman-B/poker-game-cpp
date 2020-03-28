@@ -1,25 +1,26 @@
 #ifndef DECK_HPP
 #define DECK_HPP
 
+/* Includes */
 #include <vector>
 
 #include "card.hpp"
 
+/* Class declaration*/
 class deck
 {
     /* friend declarations */
-    // for printing
     friend std::ostream& operator<< (std::ostream&, const deck&);
 
 private:
-    std::vector<card> cards;
+    /* fields */
+    std::vector<card> cards; // holds cards
 public:
-    // ctor
-    deck();
+    /* constructor */
+    deck(); // places 52 card objects in cards vector
 
-    // ** Functions ** //
-    // shuffles all the cards in the deck (vector of cards)
-    void shuffle();
+    /*** Functions ***/
+    void shuffle(); // calls random_shuffle on cards vector
 };
 
 #endif

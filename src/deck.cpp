@@ -2,6 +2,20 @@
 
 #include <algorithm> // random_shuffle
 
+/* friend func */
+std::ostream& operator<< (std::ostream& out, const deck& d)
+{
+    if (d.cards.size() > 0)
+    {
+        for(auto const &cd : d.cards)
+        {
+            // print card with newline until last item
+            out << cd << ( (cd == *d.cards.rbegin())?"":"\n" ) << std::flush;
+        }
+    }
+    return out;
+}
+
 deck::deck()
 {
     // constructs a deck with 52 cards
@@ -18,17 +32,4 @@ deck::deck()
 void deck::shuffle()
 {
     std::random_shuffle<std::vector<card>::iterator> (cards.begin(), cards.end());
-}
-
-std::ostream& operator<< (std::ostream& out, const deck& d)
-{
-    if (d.cards.size() > 0)
-    {
-        for(auto const &cd : d.cards)
-        {
-            // print card with newline until last item
-            out << cd << ( (cd == *d.cards.rbegin())?"":"\n" ) << std::flush;
-        }
-    }
-    return out;
 }
