@@ -3,6 +3,7 @@
 
 /* Includes */
 #include <vector>
+#include <random> // mt19937
 
 #include "card.hpp"
 
@@ -15,6 +16,10 @@ class deck
 private:
     /* fields */
     std::vector<card> cards; // holds cards
+
+    // used for random number generation
+    static std::random_device rd;
+    static std::mt19937 rng;
 public:
     /* constructor */
     deck() = default; // makes empty deck

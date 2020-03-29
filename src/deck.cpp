@@ -2,6 +2,10 @@
 
 #include <algorithm> // random_shuffle
 
+/*** random_device + rng initialization ***/
+std::random_device deck::rd{};
+std::mt19937 deck::rng(rd());
+
 /* friend func */
 std::ostream& operator<< (std::ostream& out, const deck& d)
 {
@@ -19,7 +23,7 @@ std::ostream& operator<< (std::ostream& out, const deck& d)
 /*** Functions ***/
 void deck::shuffle()
 {
-    std::random_shuffle<std::vector<card>::iterator> (cards.begin(), cards.end());
+    std::shuffle(cards.begin(), cards.end(), rng);
 }
 
 // add functions
