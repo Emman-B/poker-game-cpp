@@ -23,23 +23,28 @@ void deck::shuffle()
 }
 
 // add functions
-void deck::add(const card&) // 1 card
+void deck::add(const card& cd) // 1 card
 {
-    static_assert(false);
+    cards.push_back(cd);
 }
-void deck::add(std::vector<card>::iterator, std::vector<card>::iterator) // range
+void deck::add(std::vector<card>::iterator b, std::vector<card>::iterator e) // range
 {
-    static_assert(false);
+    for (auto current = b; current != e; ++current)
+    {
+        cards.push_back(*current);
+    }
 }
 
 card deck::draw_card()
 {
-    static_assert(false);
+    card drawn_card = cards.back();
+    cards.pop_back();
+    return drawn_card;
 }
 
 void deck::clear()
 {
-    static_assert(false);
+    cards.clear();
 }
 
 /*** Non-member Functions ***/
@@ -54,4 +59,5 @@ deck make_52_card_deck()
             d.add(newcard);
         }
     }
+    return d;
 }
