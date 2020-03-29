@@ -11,13 +11,6 @@ class card
 
     friend std::ostream& operator<< (std::ostream&, const card&);
 
-private:
-    enum class suit_t;
-
-    /* fields */
-    unsigned char rank; // general range: A-10,J,Q,K
-    suit_t suit;        // four possible suits
-
 public:
     enum class suit_t
     {
@@ -27,6 +20,12 @@ public:
         SPADES   = 3
     };
 
+private:
+    /* fields */
+    unsigned char rank; // general range: A-10,J,Q,K
+    suit_t suit;        // four possible suits
+
+public:
     /* constructor */
     card(unsigned char r, suit_t s);
 
