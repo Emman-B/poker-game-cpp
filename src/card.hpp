@@ -29,7 +29,12 @@ public:
     /* constructor */
     card(unsigned char r, suit_t s);
 
+    /* operator functions */
     bool operator== (const card&) const;
+
+    /* functions */
+    suit_t get_suit() const;
+    unsigned char get_rank() const;
 };
 
 #endif

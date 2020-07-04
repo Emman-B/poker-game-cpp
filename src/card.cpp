@@ -73,3 +73,13 @@ bool card::operator== (const card& that) const
 {
     return (rank == that.rank && suit == that.suit);
 }
+
+card::suit_t card::get_suit() const
+{
+    return suit;
+}
+
+unsigned char card::get_rank() const
+{
+    return rank;
+}

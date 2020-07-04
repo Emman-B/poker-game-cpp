@@ -24,7 +24,7 @@ public:
     /* constructor */
     deck() = default; // makes empty deck
 
-    /*** Functions ***/
+    /* functions */
     void shuffle(); // calls random_shuffle on cards vector
 
     // add cards to deck
