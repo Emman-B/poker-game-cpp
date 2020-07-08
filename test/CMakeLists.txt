@@ -1,14 +1,12 @@
-cmake_minimum_required(VERSION 3.5.1)
-
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(main_tests)
-
 add_executable(
     main_tests
-    tests.cpp
+    main_tests.cpp
+    card_tests.cpp
+    ../src/card.cpp
 )
 # for testing with gtest
 target_link_libraries(main_tests gtest gtest_main rt pthread)
