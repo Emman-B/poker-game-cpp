@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 2.8.2)
-
 # information taken from https://github.com/google/googletest/blob/master/googletest/README.md
+cmake_minimum_required(VERSION 3.5.1)
 
 project(googletest-download NONE)
 
