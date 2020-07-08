@@ -34,7 +34,3 @@
 *.exe
 *.out
 *.app
-
-# ignore any build directories
-src/build/*
-test/build/*

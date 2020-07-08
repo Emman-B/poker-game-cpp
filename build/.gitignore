@@ -1,0 +1,5 @@
+# just for the purpose of having the build directory here
+# commit nothing
+*
+# except for this gitignore
+!.gitignore
