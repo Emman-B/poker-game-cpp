@@ -57,7 +57,7 @@ std::ostream& operator<< (std::ostream& out, const card& c)
 card::card(unsigned char r, suit_t s)
 {
     // error-check: is rank within range [1, 13]?
-    if (r == 0 || r > 13)
+    if (r <= 0 || r > 13)
     {
         throw std::runtime_error("card::card: rank out of range: " +
             static_cast<unsigned int>(r));

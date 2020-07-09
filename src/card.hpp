@@ -6,9 +6,6 @@
 class card
 {
     /* friend declarations */
-    friend class deck;
-        // allow deck to access enum class suit_t, rank, and suit per card
-
     friend std::ostream& operator<< (std::ostream&, const card&);
 
 public:
