@@ -41,6 +41,10 @@ void deck::add(std::vector<card>::iterator b, std::vector<card>::iterator e) // 
 
 card deck::draw_card()
 {
+    if (cards.size() == 0)
+    {
+        throw new std::runtime_error("deck::draw_card: attempted to draw card on empty deck");
+    }
     card drawn_card = cards.back();
     cards.pop_back();
     return drawn_card;
@@ -49,6 +53,12 @@ card deck::draw_card()
 void deck::clear()
 {
     cards.clear();
+}
+
+/* Operator Functions */
+bool deck::operator==(const deck& that)
+{
+    return cards == that.cards;
 }
 
 /*** Non-member Functions ***/

@@ -25,15 +25,20 @@ public:
     deck() = default; // makes empty deck
 
     /* functions */
-    void shuffle(); // calls random_shuffle on cards vector
+    void shuffle(); // calls shuffle() on cards vector
 
     // add cards to deck
     void add(const card&);
     void add(std::vector<card>::iterator, std::vector<card>::iterator);
 
+    // remove card from back of cards vector
     card draw_card();
 
+    // clear cards vector
     void clear();
+
+    /* operator functions */
+    bool operator==(const deck&);
 };
 
 /*** Non-member functions ***/
