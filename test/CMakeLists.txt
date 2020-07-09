@@ -2,11 +2,16 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# executable main_tests has all of the *_tests.cpp sources
 add_executable(
     main_tests
     main_tests.cpp
     card_tests.cpp
     ../src/card.cpp
+    deck_tests.cpp
+    ../src/deck.cpp
+    game_logic_tests.cpp
+    ../src/game_logic.cpp
 )
 # for testing with gtest
 target_link_libraries(main_tests gtest gtest_main rt pthread)
