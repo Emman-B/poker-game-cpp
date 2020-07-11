@@ -72,6 +72,11 @@ bool game_logic::has_straight() const
 
 hand_type game_logic::verify_hand(const std::vector<card> cards)
 {
+    // first reset all the bits in the hands_fulfilled bitset
+    for (size_t idx = 0; idx < 9; idx++)
+    {
+        hands_fulfilled.reset(idx);
+    }
     // ensure that the hand has 5 cards
     assert(cards.size() == 5);
 
@@ -86,16 +91,16 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
     std::unordered_map<unsigned char, size_t> ranks{};
     for (auto card : hand_cache)
     {
-        // if the specific rank is not in the unordered_map, then add it
+        // if the specific rank is in the unordered_map, then increment its count value
         auto query = ranks.find(card.get_rank());
         if (query != ranks.cend())
         {
-            ranks.insert( {card.get_rank(), 1} );
+            query->second++;
         }
-        // otherwise, we only increment its value
+        // otherwise, we add it to the unordered map
         else
         {
-            query->second++;
+            ranks.insert( {card.get_rank(), 1} );
         }
     }
 
@@ -154,7 +159,7 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
     }
 
     //** Return the highest hand_type value **//
-    for (size_t idx = hands_fulfilled.size() - 1; idx > 0; idx++)
+    for (size_t idx = hands_fulfilled.size() - 1; idx > 0; idx--)
     {
         if ( hands_fulfilled.test(idx) )
         {
