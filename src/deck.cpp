@@ -27,11 +27,13 @@ void deck::shuffle()
 }
 
 // add functions
-void deck::add(const card& cd) // 1 card
+//* add single card
+void deck::add(const card& cd)
 {
     cards.push_back(cd);
 }
-void deck::add(std::vector<card>::iterator b, std::vector<card>::iterator e) // range
+//* add with iterator range
+void deck::add(std::vector<card>::const_iterator b, std::vector<card>::const_iterator e)
 {
     for (auto current = b; current != e; ++current)
     {

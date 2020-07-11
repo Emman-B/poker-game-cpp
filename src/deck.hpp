@@ -29,7 +29,7 @@ public:
 
     // add cards to deck
     void add(const card&);
-    void add(std::vector<card>::iterator, std::vector<card>::iterator);
+    void add(std::vector<card>::const_iterator, std::vector<card>::const_iterator);
 
     // remove card from back of cards vector
     card draw_card();
