@@ -118,30 +118,11 @@ TEST(gamelogictest, four_of_a_kind)
 {
     // tests 3 hands: four of a kind, royal flush, four of a kind
     game_logic logic {}; // initialize logic
-    std::vector<card> hand1 = {
-        card(11, card::suit_t::CLUBS),
-        card(9, card::suit_t::DIAMONDS),
-        card(11, card::suit_t::SPADES),
-        card(11, card::suit_t::HEARTS),
-        card(11, card::suit_t::HEARTS)
-    };
-    EXPECT_EQ(hand_type::FOUR_OF_A_KIND, logic.verify_hand(hand1));
-    std::vector<card> hand2 = {
-        card(1, card::suit_t::DIAMONDS),
-        card(10, card::suit_t::DIAMONDS),
-        card(11, card::suit_t::DIAMONDS),
-        card(12, card::suit_t::DIAMONDS),
-        card(13, card::suit_t::DIAMONDS)
-    };
-    EXPECT_NE(hand_type::FOUR_OF_A_KIND, logic.verify_hand(hand2));
-    std::vector<card> hand3 = {
-        card(1, card::suit_t::CLUBS),
-        card(1, card::suit_t::DIAMONDS),
-        card(3, card::suit_t::SPADES),
-        card(1, card::suit_t::HEARTS),
-        card(1, card::suit_t::HEARTS)
-    };
-    EXPECT_EQ(hand_type::FOUR_OF_A_KIND, logic.verify_hand(hand3));
+    EXPECT_EQ(hand_type::FOUR_OF_A_KIND, logic.verify_hand( {11_C, 9_D, 11_S, 11_H, 11_D} ));
+
+    EXPECT_NE(hand_type::FOUR_OF_A_KIND, logic.verify_hand( {1_D, 10_D, 11_D, 12_D, 13_D} ));
+
+    EXPECT_EQ(hand_type::FOUR_OF_A_KIND, logic.verify_hand( {1_C, 1_D, 3_S, 1_H, 1_S} ));
 }
 
 //===============================================================================================//
