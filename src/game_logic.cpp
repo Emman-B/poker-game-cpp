@@ -68,15 +68,20 @@ bool game_logic::has_straight() const
         }
         prev_value = *itor;
     }
+
+    // if loop is passed, then straight exists
+    return true;
 }
 
 hand_type game_logic::verify_hand(const std::vector<card> cards)
 {
-    // first reset all the bits in the hands_fulfilled bitset
+    // first, reset all the bits in the hands_fulfilled bitset
     for (size_t idx = 0; idx < 9; idx++)
     {
         hands_fulfilled.reset(idx);
     }
+    // second, reset the hand_cache vector
+    hand_cache.clear();
     // ensure that the hand has 5 cards
     assert(cards.size() == 5);
 
@@ -137,9 +142,9 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
     }
 
     // test for full house hand (one pair + three of a kind)
-    hands_fulfilled.set( hands_fulfilled.test(static_cast<size_t>(hand_type::ONE_PAIR)) &&
+    hands_fulfilled.set( static_cast<size_t>(hand_type::FULL_HOUSE), 
+        hands_fulfilled.test(static_cast<size_t>(hand_type::ONE_PAIR)) &&
             hands_fulfilled.test(static_cast<size_t>(hand_type::THREE_OF_A_KIND)) );
-    
     //** Test for the other hands dealing with straights and/or flushes **//
     // straight
     hands_fulfilled.set( static_cast<size_t>(hand_type::STRAIGHT), has_straight() );
@@ -152,19 +157,19 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
     // royal flush (check for straight flush with A and 10)
     if ( hands_fulfilled.test(static_cast<size_t>(hand_type::STRAIGHT_FLUSH)) )
     {
-        if ( ranks.find(1) != ranks.cend() && ranks.find(10) != ranks.cend());
+        if ( ranks.find(1) != ranks.cend() && ranks.find(10) != ranks.cend())
         {
             hands_fulfilled.set(static_cast<size_t>(hand_type::ROYAL_FLUSH));
         }
     }
 
     //** Return the highest hand_type value **//
-    for (size_t idx = hands_fulfilled.size() - 1; idx > 0; idx--)
+    for (int idx = hands_fulfilled.size() - 1; idx >= 0; idx--)
     {
-        if ( hands_fulfilled.test(idx) )
+        if ( hands_fulfilled.test(static_cast<size_t>(idx)) )
         {
             // hand_type is just a size_t with a specific value
-            return static_cast<hand_type>(idx);
+            return static_cast<hand_type>(static_cast<size_t>(idx));
         }
     }
 
