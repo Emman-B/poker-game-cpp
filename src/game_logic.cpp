@@ -73,6 +73,16 @@ bool game_logic::has_straight() const
     return true;
 }
 
+bool game_logic::hands_fulfilled_test(hand_type pos) const
+{
+    return hands_fulfilled.test(static_cast<size_t>(pos));
+}
+
+void game_logic::hands_fulfilled_set(hand_type pos, bool value = true)
+{
+    hands_fulfilled.set(static_cast<size_t>(pos), value);
+}
+
 hand_type game_logic::verify_hand(const std::vector<card> cards)
 {
     // first, reset all the bits in the hands_fulfilled bitset
@@ -119,21 +129,21 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
             switch(ranks_itor->second)
             {
             case 2: // pair or two-pair
-                if (hands_fulfilled.test(static_cast<size_t>(hand_type::ONE_PAIR)))
+                if (hands_fulfilled_test(hand_type::ONE_PAIR))
                 {
-                    hands_fulfilled.set(static_cast<size_t>(hand_type::TWO_PAIR));
+                    hands_fulfilled_set(hand_type::TWO_PAIR);
                     break;
                 }
                 else
                 {
-                    hands_fulfilled.set(static_cast<size_t>(hand_type::ONE_PAIR));
+                    hands_fulfilled_set(hand_type::ONE_PAIR);
                 }
                 break;
             case 3: // three of a kind
-                hands_fulfilled.set(static_cast<size_t>(hand_type::THREE_OF_A_KIND));
+                hands_fulfilled_set(hand_type::THREE_OF_A_KIND);
                 break;
             case 4: // four of a kind
-                hands_fulfilled.set(static_cast<size_t>(hand_type::FOUR_OF_A_KIND));
+                hands_fulfilled_set(hand_type::FOUR_OF_A_KIND);
                 break;
             default:
                 break;
@@ -142,24 +152,24 @@ hand_type game_logic::verify_hand(const std::vector<card> cards)
     }
 
     // test for full house hand (one pair + three of a kind)
-    hands_fulfilled.set( static_cast<size_t>(hand_type::FULL_HOUSE), 
-        hands_fulfilled.test(static_cast<size_t>(hand_type::ONE_PAIR)) &&
-            hands_fulfilled.test(static_cast<size_t>(hand_type::THREE_OF_A_KIND)) );
+    hands_fulfilled_set( hand_type::FULL_HOUSE,
+        hands_fulfilled_test(hand_type::ONE_PAIR) && hands_fulfilled_test(hand_type::THREE_OF_A_KIND)
+    );
     //** Test for the other hands dealing with straights and/or flushes **//
     // straight
-    hands_fulfilled.set( static_cast<size_t>(hand_type::STRAIGHT), has_straight() );
+    hands_fulfilled_set( hand_type::STRAIGHT, has_straight() );
     // flush
-    hands_fulfilled.set( static_cast<size_t>(hand_type::FLUSH), has_flush() );
+    hands_fulfilled_set( hand_type::FLUSH, has_flush() );
     // straight flush
-    hands_fulfilled.set( static_cast<size_t>(hand_type::STRAIGHT_FLUSH),
-            hands_fulfilled.test(static_cast<size_t>(hand_type::STRAIGHT)) &&
-                    hands_fulfilled.test(static_cast<size_t>(hand_type::FLUSH)) );
+    hands_fulfilled_set( hand_type::STRAIGHT_FLUSH,
+        hands_fulfilled_test(hand_type::STRAIGHT) && hands_fulfilled_test(hand_type::FLUSH)
+    );
     // royal flush (check for straight flush with A and 10)
-    if ( hands_fulfilled.test(static_cast<size_t>(hand_type::STRAIGHT_FLUSH)) )
+    if ( hands_fulfilled_test( hand_type::STRAIGHT_FLUSH) )
     {
         if ( ranks.find(1) != ranks.cend() && ranks.find(10) != ranks.cend())
         {
-            hands_fulfilled.set(static_cast<size_t>(hand_type::ROYAL_FLUSH));
+            hands_fulfilled_set( hand_type::ROYAL_FLUSH );
         }
     }
 

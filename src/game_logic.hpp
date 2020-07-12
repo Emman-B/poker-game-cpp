@@ -28,10 +28,13 @@ private:
     std::vector<card> hand_cache{};     // update cache for each call to verify_hand()
 
     /* functions */
-    // both has_flush and has_straight are called in verify_hand()
-    //      and uses hand_cache
-    bool has_flush() const;
-    bool has_straight() const;
+    bool has_flush() const;     // called in verify_hand()
+    bool has_straight() const;  // called in verify_hand()
+
+    // tests bitset using hand_type
+    bool hands_fulfilled_test(hand_type) const;
+    // sets bit on bitset using hand_type
+    void hands_fulfilled_set(hand_type, bool);
 public:
     /* functions */
     hand_type verify_hand(const std::vector<card> cards);
